@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.CityFragment">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/cityFragmentName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/cityNameTextSize"
+        android:textColor="@color/cityNameColor"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="@dimen/cityNameMargin"
+        android:layout_marginTop="@dimen/cityNameMargin"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/temperatureInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/temperature"
+        android:textSize="@dimen/textSize"
+        android:textStyle="bold"
+        android:textColor="#F391EADD"
+        app:layout_constraintStart_toStartOf="@id/cityFragmentTemp"
+        app:layout_constraintTop_toBottomOf="@id/cityFragmentName"
+        android:layout_marginTop="15dp"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/cityFragmentTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="80sp"
+        android:textColor="#F391EADD"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/temperatureInfo"
+        android:layout_marginLeft="@dimen/cityNameMargin"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/FLikeInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Feel_like"
+        android:textSize="@dimen/textSize"
+        android:textStyle="bold"
+        android:textColor="#F391EADD"
+        app:layout_constraintStart_toStartOf="@id/cityFragmentTemp"
+        app:layout_constraintTop_toBottomOf="@id/cityFragmentTemp"
+        android:layout_marginTop="15dp"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/FLike"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="80sp"
+        android:textColor="#F391EADD"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/FLikeInfo"
+        android:layout_marginLeft="@dimen/cityNameMargin"
+        android:layout_marginTop="15dp"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/aboutWeatherInfoOnDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/textSize"
+        android:textStyle="bold"
+        android:textColor="#F391EADD"
+        app:layout_constraintStart_toStartOf="@id/cityFragmentTemp"
+        app:layout_constraintTop_toBottomOf="@id/FLike"
+        android:layout_marginTop="15dp"/>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
