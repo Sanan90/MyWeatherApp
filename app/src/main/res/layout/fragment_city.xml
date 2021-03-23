@@ -74,7 +74,16 @@
         android:textColor="#F391EADD"
         app:layout_constraintStart_toStartOf="@id/cityFragmentTemp"
         app:layout_constraintTop_toBottomOf="@id/FLike"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="15dp"
+        android:paddingRight="20dp"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/aboutConnect"
+        android:layout_width="20dp"
+        android:layout_height="0dp"
+        android:textSize="30sp"
+        app:layout_constraintTop_toTopOf="@id/temperatureInfo"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 
 

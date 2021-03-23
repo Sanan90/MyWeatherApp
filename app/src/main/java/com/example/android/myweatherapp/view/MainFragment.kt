@@ -1,5 +1,7 @@
 package com.example.android.myweatherapp.view
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -53,6 +55,7 @@ class MainFragment : Fragment() {
         viewModel.getLiveData().observe(viewLifecycleOwner, Observer { renderData(it) })
         viewModel.getWeatherCitiesList()
     }
+
 
     private fun renderData(appState: AppState?) {
         when (appState) {
