@@ -80,8 +80,9 @@
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/aboutConnect"
         android:layout_width="20dp"
-        android:layout_height="0dp"
+        android:layout_height="400dp"
         android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintTop_toTopOf="@id/temperatureInfo"
         app:layout_constraintEnd_toEndOf="parent"/>
 

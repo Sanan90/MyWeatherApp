@@ -1,9 +1,11 @@
 package com.example.android.myweatherapp.view
 
+import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,7 +13,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.example.android.myweatherapp.R
 import com.example.android.myweatherapp.databinding.FragmentCityBinding
 import com.example.android.myweatherapp.model.FactDTO
 import com.example.android.myweatherapp.model.Weather
@@ -21,7 +25,7 @@ const val DETAILS_INTENT_FILTER = "DETAILS INTENT FILTER"
 const val CONNECT_IS_SUCCESS = "CONNECT IS SUCCESS"
 const val THREADS_FRAGMENT_BROADCAST_EXTRA = "THREADS FRAGMENT EXTRA"
 const val CITY_LAT = "CityLat"
-const val CITY_LON = "CityLot"
+const val CITY_LON = "CityLon"
 
 class CityFragment : Fragment() {
 
@@ -108,6 +112,7 @@ class CityFragment : Fragment() {
 //        binding.FLike.text = weather.like.toString()
 //    }
 
+    @SuppressLint("ResourceAsColor")
     private fun displayWeather(weatherDTO: WeatherDTO) {
         with(binding) {
             val city = weather.city
