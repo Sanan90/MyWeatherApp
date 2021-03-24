@@ -13,7 +13,7 @@ fun aboutWeatherInfo(aboutWeather : String) : String {
         "heavy-rain" -> return "Сегодня сильный дождь. Самое то, чтобы сидеть дома и смотреть сериалы"
         "continuous-heavy-rain" -> return "Жопа там, целый день дождь будет."
         "showers" -> return "Ливень. Херачит не по детски"
-        "wet-snow" -> return "Срань господня. Снег да еще со снегом...сиди дома"
+        "wet-snow" -> return "Снег идет, очень очень мокрый...сиди дома"
         "light-snow" -> return "Сегодня небольшой снег. Ты в сказке"
         "snow" -> return "Сегодня снег, самый обычнейший, ничего особенного"
         "snow-showers" -> return "Лавину заказывали? Распишитесь"
