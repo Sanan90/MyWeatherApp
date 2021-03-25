@@ -38,7 +38,8 @@ android {
 }
 
 dependencies {
-
+    //GlideToVectorYou
+    implementation 'com.github.corouteam:GlideToVectorYou:v2.0.0'
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
 

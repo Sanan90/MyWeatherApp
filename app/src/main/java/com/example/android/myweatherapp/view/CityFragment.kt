@@ -142,7 +142,30 @@ class CityFragment : Fragment() {
             aboutWeatherInfoOnDisplay.text = aboutWeather
             aboutConnect.text = "Connecting"
 
-            Picasso.get().load(R.drawable.nachalo).into(headerIcon)
+            when (city.name) {
+                "Москва" -> Picasso.get().load(R.drawable.moscow).into(headerIcon)
+                "Клин" -> Picasso.get().load(R.drawable.Klin).into(headerIcon)
+                "Гянджа" -> Picasso.get().load(R.drawable.Ganja).into(headerIcon)
+                "Баку" -> Picasso.get().load(R.drawable.Baku).into(headerIcon)
+                "Пенза" -> Picasso.get().load(R.drawable.Penza).into(headerIcon)
+                "Санкт Петербург" -> Picasso.get().load(R.drawable.piter).into(headerIcon)
+                "Ставрополь" -> Picasso.get().load(R.drawable.stavropol).into(headerIcon)
+                "Тверь" -> Picasso.get().load(R.drawable.tver).into(headerIcon)
+                "Астана" -> Picasso.get().load(R.drawable.Astana).into(headerIcon)
+                "Ярославль" -> Picasso.get().load(R.drawable.yaroslavl).into(headerIcon)
+                "Ульяновск" -> Picasso.get().load(R.drawable.ulyanovsk).into(headerIcon)
+                "Новосибирск" -> Picasso.get().load(R.drawable.novosibirsk).into(headerIcon)
+                "Пунта-Кана" -> Picasso.get().load(R.drawable.puntakana).into(headerIcon)
+                "Бангкок" -> Picasso.get().load(R.drawable.bangkok).into(headerIcon)
+                "Нью-йорк" -> Picasso.get().load(R.drawable.newyork).into(headerIcon)
+                "Сидней" -> Picasso.get().load(R.drawable.sidney).into(headerIcon)
+                "Мехико" -> Picasso.get().load(R.drawable.mehiko).into(headerIcon)
+                "Сочи" -> Picasso.get().load(R.drawable.sochi).into(headerIcon)
+                "Норильск" -> Picasso.get().load(R.drawable.norilsk).into(headerIcon)
+                "Черапунджи" -> Picasso.get().load(R.drawable.cherapunji).into(headerIcon)
+                "Маракайбо" -> Picasso.get().load(R.drawable.marakaybo).into(headerIcon)
+
+            }
         }
     }
 
