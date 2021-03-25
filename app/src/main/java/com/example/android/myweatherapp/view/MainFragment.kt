@@ -60,7 +60,7 @@ class MainFragment : Fragment() {
     private fun renderData(appState: AppState?) {
         when (appState) {
             is AppState.Success -> {
-                adapter.setWeather(appState.list)
+                adapter.setWeather(appState.weatherData)
             }
             is AppState.Error -> {
             }
