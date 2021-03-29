@@ -14,12 +14,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.android.myweatherapp.R
 import com.example.android.myweatherapp.databinding.FragmentCityBinding
 import com.example.android.myweatherapp.model.FactDTO
 import com.example.android.myweatherapp.model.Weather
 import com.example.android.myweatherapp.model.WeatherDTO
+import com.example.android.myweatherapp.viewmodel.AppState
+import com.example.android.myweatherapp.viewmodel.DetailsViewModel
+import com.squareup.picasso.Picasso
 
 const val DETAILS_INTENT_FILTER = "DETAILS INTENT FILTER"
 const val CONNECT_IS_SUCCESS = "CONNECT IS SUCCESS"
@@ -32,33 +37,40 @@ class CityFragment : Fragment() {
     var _binding: FragmentCityBinding? = null
     val binding get() = _binding!!
     private lateinit var weather: Weather
+    private val viewModel: DetailsViewModel by lazy { ViewModelProvider(this).get(DetailsViewModel::class.java) }
 
-    private val broadcastReceiver : BroadcastReceiver = object : BroadcastReceiver() {
+    private val broadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent) {
             when (intent.getStringExtra(RESULT_INFO)) {
-                CONNECT_IS_FAILED ->  connectIsFailed(intent.getStringExtra(CONNECT_IS_FAILED)!!)
-                CONNECT_IS_SUCCESS ->  {
+                CONNECT_IS_FAILED -> connectIsFailed(intent.getStringExtra(CONNECT_IS_FAILED)!!)
+                CONNECT_IS_SUCCESS -> {
                     onLoaderListener.onLoaded(
-                        weatherDTO = WeatherDTO(
-                            fact = FactDTO(
+                        WeatherDTO(
+
+                            FactDTO(
                                 intent.getIntExtra(CITY_TEMP, -100),
                                 intent.getIntExtra(CITY_FEELS_LIKE, -100),
-                                intent.getStringExtra(CITY_CONDITION))))
+                                intent.getStringExtra(CITY_CONDITION),
+                                intent.getStringExtra("CITY_ICON")
+                            )
+                        )
+                    )
                 }
                 else -> someError()
             }
         }
     }
 
-    private val onLoaderListener : WeatherLoader.WeatherLoaderListener = object : WeatherLoader.WeatherLoaderListener {
+    private val onLoaderListener: WeatherLoader.WeatherLoaderListener =
+        object : WeatherLoader.WeatherLoaderListener {
 
-        override fun onLoaded(weatherDTO: WeatherDTO) {
-            displayWeather(weatherDTO)
-        }
+            override fun onLoaded(weatherDTO: WeatherDTO) {
+                displayWeather(weather)
+            }
 
-        override fun onFailed(throwable: Throwable) {
+            override fun onFailed(throwable: Throwable) {
+            }
         }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +80,6 @@ class CityFragment : Fragment() {
                 .registerReceiver(broadcastReceiver, IntentFilter(DETAILS_INTENT_FILTER))
         }
     }
-
 
 
     override fun onCreateView(
@@ -85,16 +96,25 @@ class CityFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         weather = arguments?.getParcelable(CHOOSE_CITY) ?: Weather()
 
-        val loader = WeatherLoader()
+//        initMainService()
 
-        initMainService()
-
+        viewModel.getLiveData().observe(viewLifecycleOwner, Observer { RenderData(it) })
+        viewModel.getWeatherFromRemoteSource(weather.city.lat, weather.city.lon)
 //        loader.loadWeather()
 
-        binding.cityFragmentName.text = weather.city.name
+//        binding.cityFragmentName.text = weather.city.name
+
 //        binding.cityFragmentTemp.text = weather.temperature.toString()
 //        binding.FLike.text = weather.like.toString()
 
+    }
+
+    private fun RenderData(appState: AppState?) {
+        when (appState) {
+            is AppState.Success -> {
+                displayWeather(appState.weatherData[0])
+            }
+        }
     }
 
     private fun initMainService() {
@@ -113,19 +133,43 @@ class CityFragment : Fragment() {
 //    }
 
     @SuppressLint("ResourceAsColor")
-    private fun displayWeather(weatherDTO: WeatherDTO) {
+    private fun displayWeather(weather2: Weather) {
         with(binding) {
             val city = weather.city
             cityFragmentName.text = city.name
-            cityFragmentTemp.text = weatherDTO.fact?.temp.toString()
-            FLike.text = weatherDTO.fact?.feels_like.toString()
-            val aboutWeather : String = aboutWeatherInfo(weatherDTO.fact?.condition.toString())
+            cityFragmentTemp.text = weather2.temperature.toString()
+            FLike.text = weather2.like.toString()
+            val aboutWeather: String = aboutWeatherInfo(weather2.condition)
             aboutWeatherInfoOnDisplay.text = aboutWeather
             aboutConnect.text = "Connecting"
+
+            when (city.name) {
+                "Москва" -> Picasso.get().load(R.drawable.moscow).into(headerIcon)
+                "Клин" -> Picasso.get().load(R.drawable.klin).into(headerIcon)
+                "Гянджа" -> Picasso.get().load(R.drawable.ganja).into(headerIcon)
+                "Баку" -> Picasso.get().load(R.drawable.baku).into(headerIcon)
+                "Пенза" -> Picasso.get().load(R.drawable.penza).into(headerIcon)
+                "Санкт Петербург" -> Picasso.get().load(R.drawable.piter).into(headerIcon)
+                "Ставрополь" -> Picasso.get().load(R.drawable.stavropol).into(headerIcon)
+                "Тверь" -> Picasso.get().load(R.drawable.tver).into(headerIcon)
+                "Астана" -> Picasso.get().load(R.drawable.astana).into(headerIcon)
+                "Ярославль" -> Picasso.get().load(R.drawable.yaroslavl).into(headerIcon)
+                "Ульяновск" -> Picasso.get().load(R.drawable.ulyanovsk).into(headerIcon)
+                "Новосибирск" -> Picasso.get().load(R.drawable.novosibirsk).into(headerIcon)
+                "Пунта-Кана" -> Picasso.get().load(R.drawable.puntakana).into(headerIcon)
+                "Бангкок" -> Picasso.get().load(R.drawable.bangkok).into(headerIcon)
+                "Нью-йорк" -> Picasso.get().load(R.drawable.newyork).into(headerIcon)
+                "Сидней" -> Picasso.get().load(R.drawable.sidney).into(headerIcon)
+                "Мехико" -> Picasso.get().load(R.drawable.mehiko).into(headerIcon)
+                "Сочи" -> Picasso.get().load(R.drawable.sochi).into(headerIcon)
+                "Норильск" -> Picasso.get().load(R.drawable.norilsk).into(headerIcon)
+                "Черапунджи" -> Picasso.get().load(R.drawable.cherapunji).into(headerIcon)
+                "Маракайбо" -> Picasso.get().load(R.drawable.marakaybo).into(headerIcon)
+            }
         }
     }
 
-    private fun connectIsFailed(connectFailed : String) {
+    private fun connectIsFailed(connectFailed: String) {
         binding.aboutConnect.text = "Connect is failed"
     }
 
