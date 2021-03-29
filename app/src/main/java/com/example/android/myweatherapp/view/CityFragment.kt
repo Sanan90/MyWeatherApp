@@ -102,7 +102,8 @@ class CityFragment : Fragment() {
         viewModel.getWeatherFromRemoteSource(weather.city.lat, weather.city.lon)
 //        loader.loadWeather()
 
-        binding.cityFragmentName.text = weather.city.name
+//        binding.cityFragmentName.text = weather.city.name
+
 //        binding.cityFragmentTemp.text = weather.temperature.toString()
 //        binding.FLike.text = weather.like.toString()
 
@@ -132,26 +133,26 @@ class CityFragment : Fragment() {
 //    }
 
     @SuppressLint("ResourceAsColor")
-    private fun displayWeather(weather: Weather) {
+    private fun displayWeather(weather2: Weather) {
         with(binding) {
             val city = weather.city
             cityFragmentName.text = city.name
-            cityFragmentTemp.text = weather.temperature.toString()
-            FLike.text = weather.like.toString()
-            val aboutWeather: String = aboutWeatherInfo(weather.condition)
+            cityFragmentTemp.text = weather2.temperature.toString()
+            FLike.text = weather2.like.toString()
+            val aboutWeather: String = aboutWeatherInfo(weather2.condition)
             aboutWeatherInfoOnDisplay.text = aboutWeather
             aboutConnect.text = "Connecting"
 
             when (city.name) {
                 "Москва" -> Picasso.get().load(R.drawable.moscow).into(headerIcon)
-                "Клин" -> Picasso.get().load(R.drawable.Klin).into(headerIcon)
-                "Гянджа" -> Picasso.get().load(R.drawable.Ganja).into(headerIcon)
-                "Баку" -> Picasso.get().load(R.drawable.Baku).into(headerIcon)
-                "Пенза" -> Picasso.get().load(R.drawable.Penza).into(headerIcon)
+                "Клин" -> Picasso.get().load(R.drawable.klin).into(headerIcon)
+                "Гянджа" -> Picasso.get().load(R.drawable.ganja).into(headerIcon)
+                "Баку" -> Picasso.get().load(R.drawable.baku).into(headerIcon)
+                "Пенза" -> Picasso.get().load(R.drawable.penza).into(headerIcon)
                 "Санкт Петербург" -> Picasso.get().load(R.drawable.piter).into(headerIcon)
                 "Ставрополь" -> Picasso.get().load(R.drawable.stavropol).into(headerIcon)
                 "Тверь" -> Picasso.get().load(R.drawable.tver).into(headerIcon)
-                "Астана" -> Picasso.get().load(R.drawable.Astana).into(headerIcon)
+                "Астана" -> Picasso.get().load(R.drawable.astana).into(headerIcon)
                 "Ярославль" -> Picasso.get().load(R.drawable.yaroslavl).into(headerIcon)
                 "Ульяновск" -> Picasso.get().load(R.drawable.ulyanovsk).into(headerIcon)
                 "Новосибирск" -> Picasso.get().load(R.drawable.novosibirsk).into(headerIcon)
@@ -164,7 +165,6 @@ class CityFragment : Fragment() {
                 "Норильск" -> Picasso.get().load(R.drawable.norilsk).into(headerIcon)
                 "Черапунджи" -> Picasso.get().load(R.drawable.cherapunji).into(headerIcon)
                 "Маракайбо" -> Picasso.get().load(R.drawable.marakaybo).into(headerIcon)
-
             }
         }
     }

@@ -16,13 +16,13 @@ private const val REQUEST_ERROR = "Ошибка запроса на сервер
 private const val CORRUPTED_DATA = "Неполные данные"
 
 class DetailsViewModel (
-    private val detailLiveData: MutableLiveData<AppState> = MutableLiveData(),
+    private val `detailLiveData`: MutableLiveData<AppState> = MutableLiveData(),
     private val detailsRepositoryImpl: DetailsRepository = DetailsRepositoryImpl(RemoteDataSource())
 ) : ViewModel() {
-    fun getLiveData() = detailLiveData
+    fun getLiveData() = `detailLiveData`
 
     fun getWeatherFromRemoteSource(lat: Double, lon: Double) {
-        detailLiveData.value = AppState.Loading
+        `detailLiveData`.value = AppState.Loading
         detailsRepositoryImpl.getWeatherDetailsFromServer(lat, lon, callBack)
     }
 
@@ -30,7 +30,7 @@ class DetailsViewModel (
 
         override fun onResponse(call: Call<WeatherDTO>, response: Response<WeatherDTO>) {
             val serverResponse: WeatherDTO? = response.body()
-            detailLiveData.postValue(
+            `detailLiveData`.postValue(
                 if (response.isSuccessful && serverResponse != null) {
                     checkResponse(serverResponse)
                 } else {
@@ -40,7 +40,7 @@ class DetailsViewModel (
         }
 
         override fun onFailure(call: Call<WeatherDTO>, t: Throwable) {
-            detailLiveData.postValue(AppState.Error(Throwable(t.message ?: REQUEST_ERROR)))
+            `detailLiveData`.postValue(AppState.Error(Throwable(t.message ?: REQUEST_ERROR)))
         }
 
         private fun checkResponse(serverResponse: WeatherDTO): AppState {
