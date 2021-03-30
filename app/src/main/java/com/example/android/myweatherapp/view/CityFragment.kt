@@ -143,6 +143,15 @@ class CityFragment : Fragment() {
             aboutWeatherInfoOnDisplay.text = aboutWeather
             aboutConnect.text = "Connecting"
 
+            viewModel.saveWeatherOnDb(
+                Weather(
+                    weather.city,
+                    weather2.temperature,
+                    weather2.like,
+                    weather2.condition
+                )
+            )
+
             when (city.name) {
                 "Москва" -> Picasso.get().load(R.drawable.moscow).into(headerIcon)
                 "Клин" -> Picasso.get().load(R.drawable.klin).into(headerIcon)
